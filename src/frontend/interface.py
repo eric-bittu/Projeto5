@@ -1,70 +1,66 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
-from backend.processador import gerar_grafico
+from tkinter import ttk, filedialog
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from backend.processador import carregar_dados, criar_figura
 
-
-class Aplicacao(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Analisador de Dados")
-        self.geometry("400x300")
-
-        # Container principal
-        self.container = tk.Frame(self)
-        self.container.pack(fill="both", expand=True)
-
-        self.tela_menu = TelaMenu(parent=self.container, controller=self)
-        self.tela_analise = TelaAnalise(parent=self.container, controller=self)
-
-        self.mostrar_tela("menu")
-
-    def mostrar_tela(self, nome_tela):
-        if nome_tela == "menu":
-            self.tela_analise.pack_forget()
-            self.tela_menu.pack(fill="both", expand=True)
-        else:
-            self.tela_menu.pack_forget()
-            self.tela_analise.pack(fill="both", expand=True)
-
-
-class TelaMenu(tk.Frame):
-    def __init__(self, parent, controller):
+class TelaAnaliseDinamica(tk.Frame):
+    def __init__(self, parent):
         super().__init__(parent)
-        label = tk.Label(self, text="Menu Principal", font=("Arial", 18))
-        label.pack(pady=20)
+        self.df = None
+        self.canvas = None
 
-        btn = tk.Button(self, text="Ir para Análise",
-                        command=lambda: controller.mostrar_tela("analise"))
-        btn.pack()
+        # --- Painel de Controle (Esquerda) ---
+        self.controls = tk.Frame(self, width=200, padx=10, pady=10)
+        self.controls.pack(side="left", fill="y")
 
+        tk.Button(self.controls, text="1. Selecionar CSV", command=self.importar).pack(fill="x", pady=5)
 
-class TelaAnalise(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        self.caminho_arquivo = ""
+        tk.Label(self.controls, text="Eixo X:").pack(anchor="w")
+        self.cb_x = ttk.Combobox(self.controls, state="readonly")
+        self.cb_x.pack(fill="x", pady=5)
 
-        label = tk.Label(self, text="Tela de Análise", font=("Arial", 18))
-        label.pack(pady=10)
+        tk.Label(self.controls, text="Eixo Y:").pack(anchor="w")
+        self.cb_y = ttk.Combobox(self.controls, state="readonly")
+        self.cb_y.pack(fill="x", pady=5)
 
-        btn_selecionar = tk.Button(self, text="Escolher Arquivo (CSV)", command=self.selecionar_arquivo)
-        btn_selecionar.pack(pady=5)
+        tk.Label(self.controls, text="Tipo de Gráfico:").pack(anchor="w")
+        self.cb_tipo = ttk.Combobox(self.controls, values=["Barras", "Linhas", "Dispersão (Scatter)"], state="readonly")
+        self.cb_tipo.current(0)
+        self.cb_tipo.pack(fill="x", pady=5)
 
-        self.lbl_arquivo = tk.Label(self, text="Nenhum arquivo selecionado", fg="gray")
-        self.lbl_arquivo.pack()
+        tk.Button(self.controls, text="Gerar/Atualizar Gráfico", bg="blue", fg="white",
+                  command=self.plotar).pack(fill="x", pady=20)
 
-        btn_gerar = tk.Button(self, text="Gerar Gráfico", command=self.executar_analise, bg="green", fg="white")
-        btn_gerar.pack(pady=20)
+        # --- Área do Gráfico (Direita) ---
+        self.chart_frame = tk.Frame(self, bg="white")
+        self.chart_frame.pack(side="right", fill="both", expand=True)
 
-        btn_voltar = tk.Button(self, text="Voltar ao Menu", command=lambda: controller.mostrar_tela("menu"))
-        btn_voltar.pack()
+    def importar(self):
+        caminho = filedialog.askopenfilename(filetypes=[("CSV", "*.csv")])
+        if caminho:
+            self.df = carregar_dados(caminho)
+            colunas = list(self.df.columns)
+            self.cb_x['values'] = colunas
+            self.cb_y['values'] = colunas
+            self.cb_x.current(0)
+            self.cb_y.current(0)
 
-    def selecionar_arquivo(self):
-        self.caminho_arquivo = filedialog.askopenfilename(filetypes=[("Arquivos CSV", "*.csv")])
-        if self.caminho_arquivo:
-            self.lbl_arquivo.config(text=self.caminho_arquivo.split('/')[-1])
+    def plotar(self):
+        if self.df is None: return
 
-    def executar_analise(self):
-        if not self.caminho_arquivo:
-            messagebox.showwarning("Aviso", "Selecione um arquivo primeiro!")
-            return
-        gerar_grafico(self.caminho_arquivo)
+        # Limpa o gráfico anterior se existir
+        if self.canvas:
+            self.canvas.get_tk_widget().destroy()
+
+        # Chama o backend para gerar a figura
+        fig = criar_figura(
+            self.df,
+            self.cb_x.get(),
+            self.cb_y.get(),
+            self.cb_tipo.get()
+        )
+
+        # Desenha a figura no Tkinter
+        self.canvas = FigureCanvasTkAgg(fig, master=self.chart_frame)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(fill="both", expand=True)
