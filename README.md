@@ -4,8 +4,6 @@
 <a href= "https://www.fecap.br/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhZPrRa89Kma0ZZogxm0pi-tCn_TLKeHGVxywp-LXAFGR3B1DPouAJYHgKZGV0XTEf4AE&usqp=CAU" alt="FECAP - Fundação de Comércio Álvares Penteado" border="0"></a>
 </p>
 
-# Dashboard de Indicadores Cannoli - Brunettes
-
 ## 👥 Grupo: Brunettes
 # 📊 Dashboard Estratégico – Cannoli FoodTech
 
@@ -58,21 +56,20 @@ Desenvolver um **dashboard web seguro, escalável e interativo** para análise d
 
 ---
 
+## 📚 Professores Orientadores
+
+* **[Eduardo Savino Gomes](https://www.linkedin.com/in/eduardo-savino/)**
+* **[Lucy Mari Tabuti](https://www.linkedin.com/in/lucymari/)**
+* **[Maurício Lopes da Cunha](https://www.linkedin.com/in/maureen-leung-5630492a/)**
+* **[Rodnil da Silva Moreira Lisboa](https://www.linkedin.com/in/professorrodnil/)**
+* **[Victor Bruno Alexander Rosetti de Quiroz](https://www.linkedin.com/in/victorbarq/)**
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 ### Linguagem Principal
 - Python
-
-### Dashboard / Frontend
-- Streamlit
-
-### Análise e Tratamento de Dados
-- Pandas  
-- NumPy  
-
-### Visualização de Dados
-- Plotly  
-- Matplotlib  
 
 ### Ferramentas de Desenvolvimento
 - Git e GitHub  
