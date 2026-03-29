@@ -48,7 +48,7 @@ Desenvolver um **dashboard web seguro, escalável e interativo** para análise d
 
 🔹 [Bruno Eduardo da Silva Pinho](https://github.com/Smug303)  
 🔹 [Eric Victor Bittu Silva](https://github.com/eric-bittu)  
-🔹 [Rafael Marques](https://github.com/RafaMoraesMarques)  
+🔹 [Rafael Marques](https://github.com/Rafa-M-Marques)  
 🔹 [Vivian Kaori Umaki](https://github.com/vivikari)  
 🔹 [Yanko Lee](https://github.com/Yanko-dev)
 
