@@ -20,9 +20,8 @@ O dashboard é desenvolvido com base em princípios de:
 - 📊 **Ciência de Dados** (modelagem, métricas, inferência e interpretação)
 - 🎨 **Usabilidade e UX/UI** (clareza visual, hierarquia de informações, filtros e navegação)
 - 🔒 **Segurança e escalabilidade**
-- ⚡ **Atualização de dados em tempo real** 
+- ⚡ **Atualização de dados em tempo real**
 
----
 
 ## 🎯 Objetivos
 
@@ -40,6 +39,32 @@ Desenvolver um **dashboard web seguro, escalável e interativo** para análise d
 
 ---
 
+
+## 🚀 Como rodar o projeto (Passo a Passo)
+
+### 1. Baixar o código
+Abra o seu terminal (CMD ou PowerShell) e cole:
+```
+git clone https://github.com/seu-usuario/seu-repositorio.git
+```
+### 2. Entrar na pasta
+É obrigatório entrar na pasta para o sistema funcionar. Digite:
+```
+cd seu-repositorio
+```
+### 3. Ligar o sistema
+Agora, basta colar este comando para abrir o site:
+```
+python -m streamlit run src/main.py
+```
+---
+
+## 🛠️ "Não funcionou?"
+Se o passo 3 der erro, rode este comando uma única vez para instalar as ferramentas:
+```
+python -m pip install streamlit pandas plotly
+```
+---
 ## 👥 Time do Projeto
 
 <div align="center">
