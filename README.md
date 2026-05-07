@@ -87,7 +87,7 @@ python -m pip install streamlit pandas plotly
 * **[Lucy Mari Tabuti](https://www.linkedin.com/in/lucymari/)**
 * **[Maurício Lopes da Cunha](https://www.linkedin.com/in/maureen-leung-5630492a/)**
 * **[Rodnil da Silva Moreira Lisboa](https://www.linkedin.com/in/professorrodnil/)**
-* **[Victor Bruno Alexander Rosetti de Quiroz](https://www.linkedin.com/in/victorbarq/)**
+
 
 ---
 
