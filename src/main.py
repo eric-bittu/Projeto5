@@ -692,4 +692,4 @@ if not st.session_state.logged_in:
 elif st.session_state.role == 'cannoli':
     dashboard_cannoli()
 elif st.session_state.role == 'store':
-    dashboard_store(st.session_state.store_id, st.session_state.store_name)git
+    dashboard_store(st.session_state.store_id, st.session_state.store_name)
